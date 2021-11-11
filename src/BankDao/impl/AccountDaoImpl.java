@@ -13,10 +13,18 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
     public int addAccount(Account account) throws SQLException, ClassNotFoundException {
         con = getConnection();
         String sql = "insert into account values(null,? ,? )";
+        String sql2 = "select LAST_INSERT_ID()";
         pst = con.prepareStatement(sql);
         pst.setString(1, account.getName());
         pst.setInt(2, account.getMoney());
         int res = pst.executeUpdate();
+        if(res == 1) {
+            pst = con.prepareStatement(sql2);
+            rs = pst.executeQuery();
+            if(rs.next()) {
+                int accid = rs.getInt(1);
+            }
+        }
         return res;
     }
 
