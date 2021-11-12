@@ -9,7 +9,7 @@ public class DateFormat {
         String strData = null;
         Date data = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        sdf.format(data);
+        strData = sdf.format(data);
         return strData;
     }
 }

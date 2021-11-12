@@ -16,7 +16,7 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
         String sql2 = "select LAST_INSERT_ID()";
         pst = con.prepareStatement(sql);
         pst.setString(1, account.getName());
-        pst.setInt(2, account.getMoney());
+        pst.setDouble(2, account.getMoney());
         int res = pst.executeUpdate();
         if(res == 1) {
             pst = con.prepareStatement(sql2);
@@ -40,7 +40,7 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
             account = new Account();
             account.setAccid(rs.getInt("accid"));
             account.setName(rs.getString("name"));
-            account.setMoney(rs.getInt("money"));
+            account.setMoney(rs.getDouble("money"));
         }
         return account;
     }
@@ -77,14 +77,14 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
             Account account = new Account();
             account.setAccid(rs.getInt("accid"));
             account.setName(rs.getString("name"));
-            account.setMoney(rs.getInt("money"));
+            account.setMoney(rs.getDouble("money"));
             accounts.add(account);
         }
         return accounts;
     }
 
     @Override
-    public int turnMoney(int accidOut, int accidIn, int value) throws SQLException, ClassNotFoundException {
+    public int turnMoney(int accidOut, int accidIn, double value) throws SQLException, ClassNotFoundException {
         con = getConnection();
         String sql1 = "update account set money = money - ? where accid = ?";
         String sql2 = "update account set money = money + ? where accid = ?";
@@ -92,7 +92,7 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
 
         pst = con.prepareStatement(sql1);
         pst.setDouble(1, value);
-        pst.setInt(2, accidIn);
+        pst.setInt(2, accidOut);
         int res1 = pst.executeUpdate();
 
         pst = con.prepareStatement(sql2);

@@ -3,13 +3,13 @@ package BankPo;
 public class Account {
     private int accid;
     private String name;
-    private int money;
+    private double money;
 
     public Account() {
         super();
     }
 
-    public Account(int accid, String name, int money) {
+    public Account(int accid, String name, double money) {
         this.accid = accid;
         this.name = name;
         this.money = money;
@@ -31,11 +31,9 @@ public class Account {
         this.name = name;
     }
 
-    public int getMoney() {
-        return money;
-    }
+    public double getMoney() { return money; }
 
-    public void setMoney(int money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 
